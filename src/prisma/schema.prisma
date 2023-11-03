@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Tender {
+  id                String         @id @default(uuid())
+  tenderNumber      String         @unique
+  tenderDescription String         @db.Text
+  closingDate       DateTime       @default(now())
+  closingTime       String         @default("10:00")
+  Status            Status         @default(OPEN)
+  tenderClient      String         @db.VarChar(255)
+  briefing          BriefingStatus @default(NO)
+  briefingDate      DateTime?
+  briefingLocation  String?        @db.VarChar(255)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+}
+
+enum Status {
+  OPEN
+  IN_PROGRESS
+  SUBMITED
+  AWARDED
+}
+
+enum BriefingStatus {
+  YES
+  NO
+}
