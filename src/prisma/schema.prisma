@@ -18,6 +18,12 @@ model Tender {
   updatedAt         DateTime       @updatedAt
 }
 
+model Briefing {
+  id               String   @id @default(uuid())
+  briefingDate     DateTime
+  briefingLocation String   @db.VarChar(255)
+}
+
 enum Status {
   OPEN
   IN_PROGRESS
@@ -29,3 +35,4 @@ enum BriefingStatus {
   YES
   NO
 }
+
