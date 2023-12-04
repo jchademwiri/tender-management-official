@@ -2,7 +2,8 @@ import { ThemeProvider } from '@/context/ThemeProvider';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ThemeToggle } from '@/components/ThemeToggle';
+// import { ThemeToggle } from '@/components/ThemeToggle';
+import NavMenu from '@/components/NavigationMenu/NavMenu';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,7 +28,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <nav>
-            <ThemeToggle />
+            <NavMenu />
           </nav>
           {children}
         </ThemeProvider>

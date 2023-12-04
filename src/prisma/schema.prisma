@@ -1,38 +1,44 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "mysql"
+    url      = env("DATABASE_URL")
 }
 
 model Tender {
-  id                String         @id @default(uuid())
-  tenderNumber      String         @unique
-  tenderDescription String         @db.Text
-  closingDate       DateTime       @default(now())
-  closingTime       String         @default("10:00")
-  Status            Status         @default(OPEN)
-  tenderClient      String         @db.VarChar(255)
-  briefing          BriefingStatus @default(NO)
-  briefingDate      DateTime?
-  briefingLocation  String?        @db.VarChar(255)
-  createdAt         DateTime       @default(now())
-  updatedAt         DateTime       @updatedAt
+    id                String         @id @default(uuid())
+    tenderNumber      String         @unique
+    tenderDescription String         @db.Text
+    closingDate       DateTime       @default(now())
+    closingTime       String         @default("10:00")
+    Status            Status         @default(OPEN)
+    tenderClient      String         @db.VarChar(255)
+    briefing          BriefingStatus @default(NO) 
+    createdAt         DateTime       @default(now())
+    updatedAt         DateTime       @updatedAt
+    Briefing          Briefing? // Link to Briefing model
 }
 
 model Briefing {
-  id               String   @id @default(uuid())
-  briefingDate     DateTime
-  briefingLocation String   @db.VarChar(255)
+    id               String   @id @default(uuid())
+    tenderId         String   @unique
+    tender           Tender   @relation(fields: [tenderId], references: [id])
+    briefingDate     DateTime
+    briefingLocation String   @db.VarChar(255)
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
 }
 
 enum Status {
-  OPEN
-  IN_PROGRESS
-  SUBMITED
-  AWARDED
+    OPEN
+    IN_PROGRESS
+    SUBMITTED
+    AWARDED
 }
 
 enum BriefingStatus {
-  YES
-  NO
+    YES
+    NO
 }
-

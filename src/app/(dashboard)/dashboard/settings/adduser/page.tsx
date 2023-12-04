@@ -5,7 +5,7 @@ export const metadata = {
 };
 const AddUser = () => {
   return (
-    <section className='grid place-items-center h-screen'>
+    <section className=''>
       <RegisterUser />
     </section>
   );
