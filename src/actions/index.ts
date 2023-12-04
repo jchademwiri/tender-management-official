@@ -46,6 +46,29 @@ const MonthToDateTenders = async () => {
   return totalTendersMonthToDate;
 };
 
+const nextClosingTenders = async () => {
+  const currentDate = new Date();
+
+  const nextTenders = await prisma.tender.findMany({
+    where: {
+      closingDate: {
+        gte: currentDate, // Fetch tenders closing on or after the current date
+      },
+    },
+    orderBy: [
+      {
+        closingDate: 'asc', // Order by closing date in ascending order
+      },
+      {
+        closingTime: 'asc', // Order by closing time in ascending order
+      },
+    ],
+    take: 7, // Limit the result to the next 7 tenders
+  });
+
+  return nextTenders;
+};
+
 export {
   getAllTenders,
   getTotalTenders,
@@ -53,4 +76,5 @@ export {
   getTotalBriefings,
   YearToDateTenders,
   MonthToDateTenders,
+  nextClosingTenders,
 };

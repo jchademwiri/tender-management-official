@@ -9,6 +9,11 @@ import {
 } from '@/actions';
 import { MonthToDate, TotalTenders, YearToDate } from '@/components/States';
 import {
+  RecentSubmitedTenders,
+  UpcomingBriefings,
+  UpcomingTenders,
+} from '@/components/Tenders';
+import {
   Card,
   CardDescription,
   CardHeader,
@@ -34,30 +39,11 @@ const Dashboard = async () => {
           <MonthToDate />
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Upcoming Briefings</CardTitle>
-            <CardDescription>
-              Total Submitted Tenders This month
-            </CardDescription>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Upcoming Tenders</CardTitle>
-            <CardDescription>
-              Total Submitted Tenders This month
-            </CardDescription>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Recently Submited Tenders</CardTitle>
-            <CardDescription>
-              Total Submitted Tenders This month
-            </CardDescription>
-          </CardHeader>
-        </Card>
+        <div className='grid gap-2'>
+          <RecentSubmitedTenders />
+          <UpcomingTenders />
+          <UpcomingBriefings />
+        </div>
       </div>
     </section>
   );
