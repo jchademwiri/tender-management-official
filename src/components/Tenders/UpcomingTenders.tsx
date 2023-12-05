@@ -31,24 +31,28 @@ const UpcomingTenders = async () => {
           <TableHeader>
             <TableRow>
               <TableHead>Tender Number</TableHead>
-              <TableHead>Client</TableHead>
-              <TableHead className='min-w-[130px]'>Status</TableHead>
-              <TableHead className='min-w-[150px]'>Closing Date</TableHead>
-              <TableHead>Description</TableHead>
+              <TableHead className='hidden md:block'>Client</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Closing Date</TableHead>
+              <TableHead className='hidden md:block'>Description</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {nextTenders.map((tender) => (
               <TableRow key={tender.id}>
                 <TableCell>{tender.tenderNumber}</TableCell>
-                <TableCell>{tender.tenderClient}</TableCell>
+                <TableCell className='hidden md:block'>
+                  {tender.tenderClient}
+                </TableCell>
                 <TableCell>
                   {tender.Status === 'IN_PROGRESS'
                     ? 'IN PROGRESS'
                     : tender.Status}
                 </TableCell>
                 <TableCell>{tender.closingDate.toDateString()}</TableCell>
-                <TableCell>{tender.tenderDescription}</TableCell>
+                <TableCell className='hidden md:block'>
+                  {tender.tenderDescription}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -1,3 +1,4 @@
+import '../globals.css';
 import Header from '@/components/Navigation/header';
 import HeaderMobile from '@/components/Navigation/header-mobile';
 import MarginWidthWrapper from '@/components/Navigation/margin-width-wrapper';
@@ -20,16 +21,16 @@ export default function DashboardLayout({
     <html lang='en'>
       <body>
         {/* <AuthProvider> */}
-          <div className='flex'>
-            <SideNav />
-            <main className='flex-1'>
-              <MarginWidthWrapper>
-                <Header />
-                <HeaderMobile />
-                <PageWrapper>{children}</PageWrapper>
-              </MarginWidthWrapper>
-            </main>
-          </div>
+        <div className='flex'>
+          <SideNav />
+          <main className='flex-1'>
+            <MarginWidthWrapper>
+              <Header />
+              <HeaderMobile />
+              <PageWrapper>{children}</PageWrapper>
+            </MarginWidthWrapper>
+          </main>
+        </div>
         {/* </AuthProvider> */}
         <Toaster />
       </body>

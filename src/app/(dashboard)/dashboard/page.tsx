@@ -33,8 +33,8 @@ const Dashboard = async () => {
   return (
     <section>
       <div className='border-dashed p-2 border border-secondary w-full rounded-lg'>
-        <div className='grid grid-cols-2 md:grid-cols-3 my-4 gap-2'>
-          <TotalTenders />
+        <div className='grid grid-cols-2 md:grid-cols-3 mb-2 gap-2'>
+          {/* <TotalTenders /> */}
           <YearToDate />
           <MonthToDate />
         </div>

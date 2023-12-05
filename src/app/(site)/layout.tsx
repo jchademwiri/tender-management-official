@@ -1,7 +1,8 @@
-import { ThemeProvider } from '@/context/ThemeProvider';
-import './globals.css';
+import '../globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
+import NavMenu from '@/components/NavigationMenu/NavMenu';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,14 +20,10 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <head />
       <body className={inter.className}>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <nav>
+          <NavMenu />
+        </nav>
+        {children}
       </body>
     </html>
   );
