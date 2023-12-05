@@ -1,4 +1,3 @@
-import prisma from '@/prisma/client';
 import {
   Card,
   CardHeader,
@@ -31,17 +30,17 @@ const UpcomingTenders = async () => {
           <TableHeader>
             <TableRow>
               <TableHead>Tender Number</TableHead>
-              <TableHead className='hidden md:block'>Client</TableHead>
+              <TableHead className='hidden lg:block'>Client</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Closing Date</TableHead>
-              <TableHead className='hidden md:block'>Description</TableHead>
+              <TableHead className='hidden lg:block'>Description</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {nextTenders.map((tender) => (
               <TableRow key={tender.id}>
                 <TableCell>{tender.tenderNumber}</TableCell>
-                <TableCell className='hidden md:block'>
+                <TableCell className='hidden lg:block'>
                   {tender.tenderClient}
                 </TableCell>
                 <TableCell>
@@ -50,7 +49,7 @@ const UpcomingTenders = async () => {
                     : tender.Status}
                 </TableCell>
                 <TableCell>{tender.closingDate.toDateString()}</TableCell>
-                <TableCell className='hidden md:block'>
+                <TableCell className='hidden lg:block'>
                   {tender.tenderDescription}
                 </TableCell>
               </TableRow>
