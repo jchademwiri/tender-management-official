@@ -1,5 +1,13 @@
 // import { messageCount, messages } from '@/actions';
 
+import TenderCard from '@/components/TenderCardTest';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/components/ui/card';
+
 export const metadata = {
   title: 'PMG Messages',
   description: 'PMG Messages',
@@ -7,15 +15,12 @@ export const metadata = {
 
 const ContactMessages = async () => {
   return (
-    <section>
-      <p className='font-bold text-4xl pb-2'>Total Messages: Login to see</p>
-      {/* <div className='border-dashed  p-2 border border-zinc-500 w-full min-h-64 rounded-lg'>
-        {messages.length === 0 ? (
-          <p className='font-bold text-xl'>No Message Yet</p>
-        ) : (
-          <pre>{JSON.stringify({ messages }, null, 2)}</pre>
-        )}
-      </div> */}
+    <section className='grid gap-2'>
+      <CardTitle>Upcoming Tenders</CardTitle>
+      <CardDescription>Next Upcoming Tenders</CardDescription>
+      <section className='grid md:grid-cols-3 gap-2'>
+        <TenderCard />
+      </section>
     </section>
   );
 };

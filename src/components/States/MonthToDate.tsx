@@ -6,9 +6,9 @@ const MonthToDate = async () => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>{totalTendersMonthToDate}</CardTitle>
+      <CardHeader className='items-center'>
         <CardDescription>Total Submitted Tenders This month</CardDescription>
+        <CardTitle>{totalTendersMonthToDate}</CardTitle>
       </CardHeader>
     </Card>
   );

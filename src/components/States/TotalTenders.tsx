@@ -5,9 +5,9 @@ const TotalTenders = async () => {
   const totalTenders = await getTotalTenders();
   return (
     <Card className='hidden md:block'>
-      <CardHeader>
-        <CardTitle>{totalTenders}</CardTitle>
+      <CardHeader className='items-center'>
         <CardDescription>Total Tenders Submited</CardDescription>
+        <CardTitle>{totalTenders}</CardTitle>
       </CardHeader>
     </Card>
   );
