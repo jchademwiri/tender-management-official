@@ -16,13 +16,13 @@ const getTotalBriefings = async () => {
 
 const getAllTenders = async () => {
   const allTenders = await prisma.tender.findMany({
-    where: {
-      closingDate: {
-        gte: currentDate, // Fetch tenders closing on or after the current date
-      },
-    },
+    // where: {
+    //   closingDate: {
+    //     gte: currentDate, // Fetch tenders closing on or after the current date
+    //   },
+    // },
     orderBy: {
-      closingDate: 'asc', // asc or 'desc' for descending order
+      closingDate: 'desc', // asc or 'desc' for descending order
     },
   });
   return allTenders;
