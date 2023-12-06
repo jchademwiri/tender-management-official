@@ -1,12 +1,26 @@
-import React from 'react';
+import SubmittedTendersTable from '@/components/Tenders/SubmittedTenders';
+import {
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  Card,
+  CardContent,
+} from '@/components/ui/card';
 
 const SubmittedTendersPage = () => {
   return (
     <>
-      <span className='font-bold text-4xl'>Submited Tenders</span>
-
-      <div className='border-dashed border border-zinc-500 w-full h-12 rounded-lg'></div>
-      <div className='border-dashed border border-zinc-500 w-full h-64 rounded-lg'></div>
+      <div className='border-dashed border border-zinc-500 w-full rounded-lg'>
+        <Card>
+          <CardHeader>
+            <CardTitle className='text-4xl'>All Submited Tenders</CardTitle>
+            <CardDescription>Total Submited Tenders</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <SubmittedTendersTable />
+          </CardContent>
+        </Card>
+      </div>
     </>
   );
 };

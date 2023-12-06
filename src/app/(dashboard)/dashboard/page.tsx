@@ -2,11 +2,16 @@
 // import { getServerSession } from 'next-auth';
 
 import { MonthToDate, TotalTenders, YearToDate } from '@/components/States';
+import { RecentSubmitedTenders, UpcomingBriefings } from '@/components/Tenders';
+import RecentSubmitedTendersTable from '@/components/Tenders/RecentSubmitedTenders';
+import UpcomingTendersTable from '@/components/Tenders/UpcomingTenders';
 import {
-  RecentSubmitedTenders,
-  UpcomingBriefings,
-  UpcomingTenders,
-} from '@/components/Tenders';
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 const Dashboard = async () => {
   return (
@@ -19,8 +24,26 @@ const Dashboard = async () => {
         </div>
 
         <div className='grid gap-2'>
-          <UpcomingTenders />
-          <RecentSubmitedTenders />
+          <Card>
+            <CardHeader>
+              <CardTitle>Upcoming Tenders</CardTitle>
+              <CardDescription>Next Upcoming Tenders</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <UpcomingTendersTable />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Recently Submited Tenders</CardTitle>
+              <CardDescription>
+                Total Submitted Tenders This month
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <RecentSubmitedTendersTable />
+            </CardContent>
+          </Card>
           <UpcomingBriefings />
         </div>
       </div>

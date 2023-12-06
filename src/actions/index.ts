@@ -2,6 +2,8 @@
 import prisma from '@/prisma/client';
 import { unstable_noStore as noStore } from 'next/cache';
 
+const currentDate = new Date();
+
 const getTotalTenders = async () => {
   const totalTenders = await prisma.tender.count();
   return totalTenders;
@@ -13,8 +15,29 @@ const getTotalBriefings = async () => {
 };
 
 const getAllTenders = async () => {
-  const allTenders = await prisma.tender.findMany();
+  const allTenders = await prisma.tender.findMany({
+    where: {
+      closingDate: {
+        gte: currentDate, // Fetch tenders closing on or after the current date
+      },
+    },
+    orderBy: {
+      closingDate: 'asc', // asc or 'desc' for descending order
+    },
+  });
   return allTenders;
+};
+
+const getSubmitedTenders = async () => {
+  const submittedTenders = await prisma.tender.findMany({
+    where: {
+      Status: 'SUBMITTED',
+    },
+    orderBy: {
+      closingDate: 'desc', // or 'desc' for descending order
+    },
+  });
+  return submittedTenders;
 };
 
 const getAllBriefings = async () => {
@@ -47,8 +70,6 @@ const MonthToDateTenders = async () => {
 };
 
 const nextClosingTenders = async () => {
-  const currentDate = new Date();
-
   const nextTenders = await prisma.tender.findMany({
     where: {
       closingDate: {
@@ -72,6 +93,7 @@ const nextClosingTenders = async () => {
 export {
   getAllTenders,
   getTotalTenders,
+  getSubmitedTenders,
   getAllBriefings,
   getTotalBriefings,
   YearToDateTenders,

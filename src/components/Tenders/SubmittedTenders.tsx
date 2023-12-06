@@ -15,7 +15,7 @@ import {
 } from '../ui/table';
 import { getSubmitedTenders } from '@/actions';
 
-const RecentSubmitedTendersTable = async () => {
+const SubmittedTendersTable = async () => {
   const submittedTenders = await getSubmitedTenders();
   return (
     <Table>
@@ -25,6 +25,7 @@ const RecentSubmitedTendersTable = async () => {
           <TableHead className='hidden lg:block'>Client</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Closing Date</TableHead>
+          <TableHead className='hidden lg:block'>Description</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -38,10 +39,15 @@ const RecentSubmitedTendersTable = async () => {
               {tender.Status === 'IN_PROGRESS' ? 'IN PROGRESS' : tender.Status}
             </TableCell>
             <TableCell>{tender.closingDate.toDateString()}</TableCell>
+            <TableCell className='hidden lg:block'>
+              {tender.tenderDescription && tender.tenderDescription.length > 50
+                ? `${tender.tenderDescription.slice(0, 50)}...`
+                : tender.tenderDescription}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
     </Table>
   );
 };
-export default RecentSubmitedTendersTable;
+export default SubmittedTendersTable;
