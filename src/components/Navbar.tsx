@@ -1,5 +1,3 @@
-import { logo, menu } from '@/data/images';
-import Image from 'next/image';
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
 import { Button } from './ui/button';
@@ -8,14 +6,15 @@ const Navbar = () => {
   return (
     <nav className='mx-auto flex  items-center justify-between px-4 w-full max-w-[1240px] py-4'>
       <Link href={`/`}>
-        <Image
+        {/* <Image
           src={logo}
           width={50}
           height={50}
           placeholder='blur'
           blurDataURL={logo.toString()}
           alt='logo icon'
-        />
+        /> */}
+        LOGO
       </Link>
 
       <div className='flex items-center'>
