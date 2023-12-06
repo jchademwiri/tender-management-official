@@ -9,16 +9,28 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icon icon='lucide:home' width='24' height='24' />,
   },
   {
+    title: 'Tenders',
+    path: '/dashboard/tenders',
+    icon: <Icon icon='lucide:folder' width='24' height='24' />,
+    submenu: true,
+    subMenuItems: [
+      { title: 'All', path: '/dashboard/tenders' },
+      { title: 'Submitted', path: '/dashboard/tenders/submitted' },
+      { title: 'Appointed', path: '/dashboard/tenders/appointed' },
+    ],
+  },
+  {
     title: 'Projects',
     path: '/dashboard/projects',
     icon: <Icon icon='lucide:folder' width='24' height='24' />,
     submenu: true,
     subMenuItems: [
       { title: 'All', path: '/dashboard/projects' },
-      { title: 'Web Design', path: '/dashboard/projects/web-design' },
-      { title: 'Graphic Design', path: '/dashboard/projects/graphic-design' },
+      { title: 'In Progress', path: '/dashboard/projects/in-progress' },
+      { title: 'Completed', path: '/dashboard/projects/completed' },
     ],
   },
+
   {
     title: 'Messages',
     path: '/dashboard/messages',

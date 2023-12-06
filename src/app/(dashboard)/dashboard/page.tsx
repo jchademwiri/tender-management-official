@@ -19,8 +19,8 @@ const Dashboard = async () => {
         </div>
 
         <div className='grid gap-2'>
-          <RecentSubmitedTenders />
           <UpcomingTenders />
+          <RecentSubmitedTenders />
           <UpcomingBriefings />
         </div>
       </div>

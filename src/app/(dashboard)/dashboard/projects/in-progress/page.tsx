@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ProjectsPage = () => {
+const ProjectsInProgressPage = () => {
   return (
     <>
-      <span className='font-bold text-4xl'>All Projects</span>
+      <span className='font-bold text-4xl'>Projects In Progress</span>
 
       <div className='border-dashed border border-zinc-500 w-full h-12 rounded-lg'></div>
       <div className='border-dashed border border-zinc-500 w-full h-64 rounded-lg'></div>
@@ -11,4 +11,4 @@ const ProjectsPage = () => {
   );
 };
 
-export default ProjectsPage;
+export default ProjectsInProgressPage;
