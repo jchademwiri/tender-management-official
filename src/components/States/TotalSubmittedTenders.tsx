@@ -1,15 +1,15 @@
-import { getTotalTenders } from '@/actions';
+import { getAllSubmitedTenders } from '@/actions';
 import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
-const TotalTenders = async () => {
-  const totalTenders = await getTotalTenders();
+const TotalSubmittedTenders = async () => {
+  const allSubmitedTenders = await getAllSubmitedTenders();
   return (
     <Card className='hidden md:block'>
       <CardHeader className='items-center'>
         <CardDescription>Total Tenders Submited</CardDescription>
-        <CardTitle>{totalTenders}</CardTitle>
+        <CardTitle>{allSubmitedTenders}</CardTitle>
       </CardHeader>
     </Card>
   );
 };
-export default TotalTenders;
+export default TotalSubmittedTenders;

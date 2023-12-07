@@ -1,5 +1,5 @@
-import { Card, CardHeader, CardTitle, CardDescription } from '../ui/card';
 import { MonthToDateTenders } from '@/actions';
+import { Card, CardHeader, CardTitle, CardDescription } from '../ui/card';
 
 const MonthToDate = async () => {
   const totalTendersMonthToDate = await MonthToDateTenders();

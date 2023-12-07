@@ -15,7 +15,7 @@ model Tender {
     closingTime       String         @default("10:00")
     Status            Status         @default(OPEN)
     tenderClient      String         @db.VarChar(255)
-    briefing          BriefingStatus @default(NO) 
+    briefing          BriefingStatus @default(NO)
     createdAt         DateTime       @default(now())
     updatedAt         DateTime       @updatedAt
     Briefing          Briefing? // Link to Briefing model
@@ -25,7 +25,7 @@ model Briefing {
     id               String   @id @default(uuid())
     tenderId         String   @unique
     tender           Tender   @relation(fields: [tenderId], references: [id])
-    briefingDate     DateTime
+    briefingDate     DateTime @default(now())
     briefingLocation String   @db.VarChar(255)
     createdAt        DateTime @default(now())
     updatedAt        DateTime @updatedAt
@@ -35,7 +35,7 @@ enum Status {
     OPEN
     IN_PROGRESS
     SUBMITTED
-    AWARDED
+    APPOINTED
 }
 
 enum BriefingStatus {

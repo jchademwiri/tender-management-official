@@ -15,6 +15,7 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     submenu: true,
     subMenuItems: [
       { title: 'All', path: '/dashboard/tenders' },
+      { title: 'Open Tenders', path: '/dashboard/tenders/open-tenders' },
       { title: 'Submitted', path: '/dashboard/tenders/submitted' },
       { title: 'Appointed', path: '/dashboard/tenders/appointed' },
     ],

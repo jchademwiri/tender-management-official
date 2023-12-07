@@ -8,6 +8,14 @@ const getTotalTenders = async () => {
   const totalTenders = await prisma.tender.count();
   return totalTenders;
 };
+const getAllSubmitedTenders = async () => {
+  const totalSubmitedTenders = await prisma.tender.count({
+    where: {
+      Status: 'SUBMITTED',
+    },
+  });
+  return totalSubmitedTenders;
+};
 
 const getTotalBriefings = async () => {
   const totalBriefings = await prisma.briefing.count();
@@ -22,10 +30,27 @@ const getAllTenders = async () => {
     //   },
     // },
     orderBy: {
-      closingDate: 'desc', // asc or 'desc' for descending order
+      Status: 'asc', // asc or 'desc' for descending order
     },
   });
   return allTenders;
+};
+
+const getAllOpenTenders = async () => {
+  const allOpenTenders = await prisma.tender.findMany({
+    where: {
+      closingDate: {
+        gte: currentDate, // Fetch tenders closing on or after the current date
+      },
+      Status: {
+        in: ['IN_PROGRESS', 'OPEN'],
+      },
+    },
+    orderBy: {
+      Status: 'desc', // asc or 'desc' for descending order
+    },
+  });
+  return allOpenTenders;
 };
 
 const getSubmitedTenders = async () => {
@@ -38,6 +63,17 @@ const getSubmitedTenders = async () => {
     },
   });
   return submittedTenders;
+};
+const getAppointedTenders = async () => {
+  const appointedTenders = await prisma.tender.findMany({
+    where: {
+      Status: 'APPOINTED',
+    },
+    orderBy: {
+      closingDate: 'desc', // or 'desc' for descending order
+    },
+  });
+  return appointedTenders;
 };
 
 const getAllBriefings = async () => {
@@ -52,6 +88,7 @@ const YearToDateTenders = async () => {
         gte: new Date(new Date().getFullYear(), 0, 1),
         lte: new Date(new Date().getFullYear() + 1, 0, 1),
       },
+      Status: 'SUBMITTED',
     },
   });
   return totalTendersYearToDate;
@@ -64,6 +101,7 @@ const MonthToDateTenders = async () => {
         gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
         lte: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
       },
+      Status: 'SUBMITTED',
     },
   });
   return totalTendersMonthToDate;
@@ -74,6 +112,9 @@ const nextClosingTenders = async () => {
     where: {
       closingDate: {
         gte: currentDate, // Fetch tenders closing on or after the current date
+      },
+      Status: {
+        in: ['IN_PROGRESS', 'OPEN'],
       },
     },
     orderBy: [
@@ -93,7 +134,10 @@ const nextClosingTenders = async () => {
 export {
   getAllTenders,
   getTotalTenders,
+  getAllSubmitedTenders,
   getSubmitedTenders,
+  getAllOpenTenders,
+  getAppointedTenders,
   getAllBriefings,
   getTotalBriefings,
   YearToDateTenders,

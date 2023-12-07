@@ -1,4 +1,4 @@
-import TotalTenders from './TotalTenders';
+import TotalTenders from './TotalSubmittedTenders';
 import MonthToDate from './MonthToDate';
 import YearToDate from './YearToDate';
 
