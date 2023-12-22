@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardDescription } from '../ui/card';
-import { YearToDateTenders } from '@/actions';
+import { YearToDateTenders } from '@/lib/db';
 
 const YearToDate = async () => {
   const totalTendersYearToDate = await YearToDateTenders();

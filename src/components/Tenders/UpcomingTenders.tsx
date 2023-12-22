@@ -1,5 +1,5 @@
 import TenderCard from '../Card';
-import { nextClosingTenders } from '@/actions';
+import { nextClosingTenders } from '@/lib/db';
 
 const UpcomingTenders = async () => {
   const nextTenders = await nextClosingTenders();

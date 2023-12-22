@@ -6,7 +6,7 @@ import {
   TableCell,
   Table,
 } from '../ui/table';
-import { getSubmitedTenders } from '@/actions';
+import { getSubmitedTenders } from '@/lib/db';
 
 const RecentSubmitedTendersTable = async () => {
   const submittedTenders = await getSubmitedTenders();

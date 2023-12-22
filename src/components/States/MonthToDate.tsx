@@ -1,4 +1,4 @@
-import { MonthToDateTenders } from '@/actions';
+import { MonthToDateTenders } from '@/lib/db';
 import { Card, CardHeader, CardTitle, CardDescription } from '../ui/card';
 
 const MonthToDate = async () => {

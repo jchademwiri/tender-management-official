@@ -1,4 +1,4 @@
-import { nextClosingTenders } from '@/actions';
+import { nextClosingTenders } from '@/lib/db';
 import {
   Card,
   CardContent,

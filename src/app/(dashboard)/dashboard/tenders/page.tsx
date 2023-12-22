@@ -1,4 +1,4 @@
-import { getAllTenders } from '@/actions';
+import { getAllTenders } from '@/lib/db';
 import TenderCard from '@/components/Card';
 import {
   Card,

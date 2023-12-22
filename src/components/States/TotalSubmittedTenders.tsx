@@ -1,4 +1,4 @@
-import { getAllSubmitedTenders } from '@/actions';
+import { getAllSubmitedTenders } from '@/lib/db';
 import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
 const TotalSubmittedTenders = async () => {
