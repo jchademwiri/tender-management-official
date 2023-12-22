@@ -1,11 +1,4 @@
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from '../ui/card';
-import {
   TableHeader,
   TableRow,
   TableHead,
@@ -30,10 +23,8 @@ const RecentSubmitedTendersTable = async () => {
       <TableBody>
         {submittedTenders.map((tender) => (
           <TableRow key={tender.id}>
-            <TableCell>{tender.tenderNumber}</TableCell>
-            <TableCell className='hidden lg:block'>
-              {tender.tenderClient}
-            </TableCell>
+            <TableCell>{tender.number}</TableCell>
+            <TableCell className='hidden lg:block'>{tender.client}</TableCell>
             <TableCell>
               {tender.Status === 'IN_PROGRESS' ? 'IN PROGRESS' : tender.Status}
             </TableCell>

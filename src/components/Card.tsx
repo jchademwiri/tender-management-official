@@ -7,29 +7,40 @@ import {
   CardFooter,
 } from './ui/card';
 
+type Tender = {
+  number: String;
+  closingDate: Date;
+  Status: String;
+  description: String;
+  client: String;
+  briefing?: String;
+};
+
 const TenderCard = ({
-  tenderNumber,
+  number,
   closingDate,
   Status,
-  tenderDescription,
-  tenderClient,
-}) => {
+  description,
+  client,
+  briefing,
+}: Tender) => {
   return (
     <Card>
       <CardHeader>
         <div className='flex justify-between items-center '>
           <div>
-            <CardTitle>{tenderNumber.toUpperCase()}</CardTitle>
+            <CardTitle>{number.toUpperCase()}</CardTitle>
             <CardDescription>{closingDate.toDateString()}</CardDescription>
+            <CardDescription>{briefing}</CardDescription>
           </div>
           <CardDescription>
             {Status === 'IN_PROGRESS' ? 'IN PROGRESS' : Status}
           </CardDescription>
         </div>
       </CardHeader>
-      <CardContent>{tenderDescription}</CardContent>
+      <CardContent>{description}</CardContent>
       <CardFooter>
-        <CardDescription>{tenderClient}</CardDescription>
+        <CardDescription>{client}</CardDescription>
       </CardFooter>
     </Card>
   );
