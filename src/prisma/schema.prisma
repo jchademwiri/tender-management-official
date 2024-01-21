@@ -26,7 +26,6 @@ model Tender {
 model Company {
     id   String @id @default(uuid())
     name String
-
     tenders  TenderToCompany[]
     tenderId String?
 }
