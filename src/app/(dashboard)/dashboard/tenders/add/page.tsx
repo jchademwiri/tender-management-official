@@ -19,7 +19,7 @@ import {
 
 const AddTender = () => {
   return (
-    <Card className='w-[350px]'>
+    <Card className='w-[750px]'>
       <CardHeader>
         <CardTitle>Create New Tender</CardTitle>
         <CardDescription>Save new upcoming tender.</CardDescription>

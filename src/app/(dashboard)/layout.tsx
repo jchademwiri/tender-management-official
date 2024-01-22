@@ -32,7 +32,7 @@ export default function DashboardLayout({
           </main>
         </div>
         {/* </AuthProvider> */}
-        <Toaster />
+        {/* <Toaster /> */}
       </body>
     </html>
   );
