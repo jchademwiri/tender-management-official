@@ -13,7 +13,7 @@ model Tender {
     description String            @db.Text
     closingDate DateTime          @default(now())
     closingTime String            @default("10:00")
-    Status      TenderStatus      @default(OPEN)
+    status      TenderStatus      @default(OPEN)
     client      String            @db.VarChar(255)
     hasBriefing BriefingStatus    @default(NO)
     createdAt   DateTime          @default(now())

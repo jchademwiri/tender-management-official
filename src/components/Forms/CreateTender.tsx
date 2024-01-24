@@ -21,6 +21,19 @@ import { cn } from '@/lib/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Calendar } from '../ui/calendar';
 import { toast } from '../ui/use-toast';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
+
+const companiesSchema = z.object({
+  name: z.string().min(2, {
+    message: 'A company name is required.',
+  }),
+});
 
 const createTenderFormSchema = z.object({
   number: z.string().min(2, {
@@ -35,6 +48,16 @@ const createTenderFormSchema = z.object({
   closingTime: z.string().min(2, {
     message: 'Closing Time must be at least 2 characters.',
   }),
+  status: z.string({
+    required_error: 'A status is required.',
+  }),
+  client: z.string({
+    required_error: 'A client is required.',
+  }),
+  hasBriefing: z.string({
+    required_error: 'A client is required.',
+  }),
+  companies: z.array(companiesSchema),
 });
 
 const CreateTender = () => {
@@ -88,13 +111,13 @@ const CreateTender = () => {
               </FormItem>
             )}
           />
-          <div className='flex items-center gap-4'>
+          <div className='flex gap-3 flex-col lg:flex-row justify-between'>
             {/* tender Closing Time and Date  */}
             <FormField
               control={form.control}
               name='closingDate'
               render={({ field }) => (
-                <FormItem className='flex flex-col'>
+                <FormItem className='flex flex-col w-full max-w-xs'>
                   <FormLabel>Closing Date</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -102,7 +125,7 @@ const CreateTender = () => {
                         <Button
                           variant={'outline'}
                           className={cn(
-                            'w-[240px] pl-3 text-left font-normal',
+                            'pl-3 text-left font-normal',
                             !field.value && 'text-muted-foreground'
                           )}
                         >
@@ -133,7 +156,7 @@ const CreateTender = () => {
               control={form.control}
               name='closingTime'
               render={({ field }) => (
-                <FormItem className='flex flex-col'>
+                <FormItem className='flex flex-col w-full max-w-xs'>
                   <FormLabel>Closing Time</FormLabel>
                   <FormControl>
                     <Input
@@ -146,7 +169,102 @@ const CreateTender = () => {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name='status'
+              render={({ field }) => (
+                <FormItem className='flex flex-col w-full max-w-xs'>
+                  <FormLabel>Tender Status</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder='Select tender Status' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value='OPEN'>OPEN</SelectItem>
+                      <SelectItem value='IN_PROGRESS'>IN PROGRESS</SelectItem>
+                      <SelectItem value='SUBMITTED'>SUBMITTED</SelectItem>
+                      <SelectItem value='APPOINTED'>APPOINTED</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
+          <div className='flex gap-3 flex-col lg:flex-row justify-between'>
+            <FormField
+              control={form.control}
+              name='client'
+              render={({ field }) => (
+                <FormItem className='flex flex-col w-full max-w-xs'>
+                  <FormLabel>Tender Status</FormLabel>
+                  <Select onValueChange={field.onChange}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder='Select tender Status' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value='City of Tshwane'>
+                        City of Tshwane
+                      </SelectItem>
+                      <SelectItem value='IN_PROGRESS'>IN PROGRESS</SelectItem>
+                      <SelectItem value='SUBMITTED'>SUBMITTED</SelectItem>
+                      <SelectItem value='APPOINTED'>APPOINTED</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='hasBriefing'
+              render={({ field }) => (
+                <FormItem className='flex flex-col w-full max-w-xs'>
+                  <FormLabel>Briefing Status</FormLabel>
+                  <Select onValueChange={field.onChange}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder='Select Briefing Status' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value='NO'>NO</SelectItem>
+                      <SelectItem value='YES'>YES</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          {/* <FormField
+            control={form.control}
+            name='companies'
+            render={({ field }) => (
+              <FormItem className='flex flex-col w-full max-w-xs'>
+                <FormLabel>Briefing Status</FormLabel>
+                <Select onValueChange={field.onChange}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder='Select Briefing Status' />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value='NO'>Sithembe</SelectItem>
+                    <SelectItem value='YES'>Livhu</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          /> */}
           <Button type='submit'>Submit</Button>
         </form>
       </Form>
