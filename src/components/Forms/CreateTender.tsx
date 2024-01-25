@@ -2,8 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { format } from 'date-fns';
 import * as z from 'zod';
+import { format } from 'date-fns';
 import {
   Form,
   FormControl,
@@ -29,13 +29,13 @@ import {
   SelectValue,
 } from '../ui/select';
 
-const companiesSchema = z.object({
+const companieSchema = z.object({
   name: z.string().min(2, {
     message: 'A company name is required.',
   }),
 });
 
-const createTenderFormSchema = z.object({
+const tenderFormSchema = z.object({
   number: z.string().min(2, {
     message: 'Tender Number must be at least 2 characters.',
   }),
@@ -57,18 +57,18 @@ const createTenderFormSchema = z.object({
   hasBriefing: z.string({
     required_error: 'A client is required.',
   }),
-  companies: z.array(companiesSchema),
+  companies: z.array(companieSchema),
 });
 
 const CreateTender = () => {
-  const form = useForm<z.infer<typeof createTenderFormSchema>>({
-    resolver: zodResolver(createTenderFormSchema),
+  const form = useForm<z.infer<typeof tenderFormSchema>>({
+    resolver: zodResolver(tenderFormSchema),
     defaultValues: {
       number: '',
     },
   });
 
-  function onSubmit(data: z.infer<typeof createTenderFormSchema>) {
+  function onSubmit(data: z.infer<typeof tenderFormSchema>) {
     toast({
       title: 'Tender Details:',
       description: (
@@ -265,7 +265,7 @@ const CreateTender = () => {
               </FormItem>
             )}
           /> */}
-          <Button type='submit'>Submit</Button>
+          <Button type='submit'>Create Tender</Button>
         </form>
       </Form>
     </div>
