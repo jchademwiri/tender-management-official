@@ -1,5 +1,4 @@
 'use server';
-
 import { Company } from '@/components/Forms/CreateCompany';
 import prisma from '@/prisma/client';
 import { revalidatePath } from 'next/cache';
