@@ -11,6 +11,7 @@ const getTotalTenders = async () => {
 
 const getCompanies = async () => {
   const companies = await prisma.company.findMany();
+  return companies;
 };
 
 const getAllSubmitedTenders = async () => {
@@ -23,6 +24,7 @@ const getAllSubmitedTenders = async () => {
 };
 
 const getAllTenders = async () => {
+  noStore();
   const allTenders = await prisma.tender.findMany({
     // where: {
     //   closingDate: {
@@ -37,6 +39,7 @@ const getAllTenders = async () => {
 };
 
 const getAllOpenTenders = async () => {
+  noStore();
   const allOpenTenders = await prisma.tender.findMany({
     where: {
       closingDate: {
@@ -77,6 +80,7 @@ const getAppointedTenders = async () => {
 };
 
 const YearToDateTenders = async () => {
+  noStore();
   const totalTendersYearToDate = await prisma.tender.count({
     where: {
       closingDate: {
@@ -90,6 +94,7 @@ const YearToDateTenders = async () => {
 };
 
 const MonthToDateTenders = async () => {
+  noStore();
   const totalTendersMonthToDate = await prisma.tender.count({
     where: {
       closingDate: {
@@ -103,6 +108,7 @@ const MonthToDateTenders = async () => {
 };
 
 const nextClosingTenders = async () => {
+  noStore();
   const nextTenders = await prisma.tender.findMany({
     where: {
       closingDate: {
