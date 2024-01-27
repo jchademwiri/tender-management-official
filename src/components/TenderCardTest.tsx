@@ -17,21 +17,21 @@ const TenderCardTest = async () => {
           <CardHeader>
             <div className='flex justify-between items-center '>
               <div>
-                <CardTitle>{tender.tenderNumber.toUpperCase()}</CardTitle>
+                <CardTitle>{tender.number.toUpperCase()}</CardTitle>
                 <CardDescription>
                   {tender.closingDate.toDateString()}
                 </CardDescription>
               </div>
               <CardDescription>
-                {tender.Status === 'IN_PROGRESS'
+                {tender.status === 'IN_PROGRESS'
                   ? 'IN PROGRESS'
-                  : tender.Status}
+                  : tender.status}
               </CardDescription>
             </div>
           </CardHeader>
-          <CardContent>{tender.tenderDescription}</CardContent>
+          <CardContent>{tender.description}</CardContent>
           <CardFooter>
-            <CardDescription>{tender.tenderClient}</CardDescription>
+            <CardDescription>{tender.client}</CardDescription>
           </CardFooter>
         </Card>
       ))}

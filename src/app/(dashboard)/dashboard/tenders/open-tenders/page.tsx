@@ -1,12 +1,6 @@
 import { getAllOpenTenders } from '@/lib/db';
 import TenderCard from '@/components/Card';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const AllOpenTendersPage = async () => {
   const tenders = await getAllOpenTenders();

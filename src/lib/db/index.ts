@@ -22,11 +22,6 @@ const getAllSubmitedTenders = async () => {
   return totalSubmitedTenders;
 };
 
-const getTotalBriefings = async () => {
-  const totalBriefings = await prisma.briefing.count();
-  return totalBriefings;
-};
-
 const getAllTenders = async () => {
   const allTenders = await prisma.tender.findMany({
     // where: {
@@ -79,11 +74,6 @@ const getAppointedTenders = async () => {
     },
   });
   return appointedTenders;
-};
-
-const getAllBriefings = async () => {
-  const allBriefings = await prisma.briefing.findMany();
-  return allBriefings;
 };
 
 const YearToDateTenders = async () => {
@@ -143,8 +133,6 @@ export {
   getSubmitedTenders,
   getAllOpenTenders,
   getAppointedTenders,
-  getAllBriefings,
-  getTotalBriefings,
   getCompanies,
   YearToDateTenders,
   MonthToDateTenders,

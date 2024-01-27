@@ -26,7 +26,7 @@ const RecentSubmitedTendersTable = async () => {
             <TableCell>{tender.number}</TableCell>
             <TableCell className='hidden lg:block'>{tender.client}</TableCell>
             <TableCell>
-              {tender.Status === 'IN_PROGRESS' ? 'IN PROGRESS' : tender.Status}
+              {tender.status === 'IN_PROGRESS' ? 'IN PROGRESS' : tender.status}
             </TableCell>
             <TableCell>{tender.closingDate.toDateString()}</TableCell>
           </TableRow>
