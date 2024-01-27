@@ -8,30 +8,51 @@ datasource db {
 }
 
 model Tender {
-    id          String         @id @default(uuid())
-    Number      String         @unique
-    Description String         @db.Text
-    closingDate DateTime       @default(now())
-    closingTime String         @default("10:00")
-    Status      Status         @default(OPEN)
-    Client      String         @db.VarChar(255)
-    briefing    BriefingStatus @default(NO)
-    createdAt   DateTime       @default(now())
-    updatedAt   DateTime       @updatedAt
-    Briefing    Briefing? // Link to Briefing model
+    id          String            @id @default(uuid())
+    number      String            @unique
+    description String            @db.Text
+    closingDate DateTime          @default(now())
+    closingTime String            @default("10:00")
+    status      TenderStatus      @default(OPEN)
+    client      String            @db.VarChar(255)
+    createdAt   DateTime          @default(now())
+    updatedAt   DateTime          @updatedAt
+    // hasBriefing BriefingStatus?   @default(NO)
+    // briefing    Briefing? // Link to Briefing model
+    companies   TenderToCompany[]
+    companyId   String
+    Briefing    Briefing?
+}
+
+model Company {
+    id       String            @id @default(uuid())
+    name     String
+    tenders  TenderToCompany[]
+    tenderId String?
+}
+
+// Junction table to represent the many-to-many relationship
+model TenderToCompany {
+    tender     Tender   @relation(fields: [tenderId], references: [id])
+    tenderId   String
+    company    Company  @relation(fields: [companyId], references: [id])
+    companyId  String
+    assignedAt DateTime @default(now())
+
+    @@id([tenderId, companyId])
 }
 
 model Briefing {
     id        String   @id @default(uuid())
     tenderId  String   @unique
     tender    Tender   @relation(fields: [tenderId], references: [id])
-    Date      DateTime @default(now())
-    Location  String   @db.VarChar(255)
+    date      DateTime @default(now())
+    location  String   @db.VarChar(255)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
 
-enum Status {
+enum TenderStatus {
     OPEN
     IN_PROGRESS
     SUBMITTED
@@ -42,4 +63,3 @@ enum BriefingStatus {
     YES
     NO
 }
-
