@@ -1,3 +1,4 @@
+import CreateLinks from '@/components/Navigation/CreateLinks';
 import '../globals.css';
 import Header from '@/components/Navigation/header';
 import HeaderMobile from '@/components/Navigation/header-mobile';
@@ -27,7 +28,10 @@ export default function DashboardLayout({
             <MarginWidthWrapper>
               <Header />
               <HeaderMobile />
-              <PageWrapper>{children}</PageWrapper>
+              <PageWrapper>
+                <CreateLinks />
+                {children}
+              </PageWrapper>
             </MarginWidthWrapper>
           </main>
         </div>

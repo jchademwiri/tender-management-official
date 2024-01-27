@@ -23,7 +23,7 @@ const Header = () => {
         }
       )}
     >
-      <div className='flex h-[47px] items-center justify-between px-4'>
+      <div className='flex h-[50px] items-center justify-between space-y-4 px-4'>
         <div className='flex items-center space-x-4'>
           <Link
             href='/dashboard'
@@ -33,9 +33,9 @@ const Header = () => {
             <span className='font-bold text-xl flex '>Logo</span>
           </Link>
         </div>
+
         <div className='grid grid-cols-3 place-items-center'>
           <ThemeToggle />
-
           <Button
             onClick={() =>
               signOut({

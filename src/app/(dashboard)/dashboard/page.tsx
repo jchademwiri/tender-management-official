@@ -4,6 +4,8 @@
 import { MonthToDate, TotalTenders, YearToDate } from '@/components/States';
 import { UpcomingBriefings, UpcomingTenders } from '@/components/Tenders';
 import RecentSubmitedTendersTable from '@/components/Tenders/RecentSubmitedTenders';
+import { Button } from '@/components/ui/button';
+
 import {
   Card,
   CardContent,
@@ -16,9 +18,9 @@ const Dashboard = async () => {
   return (
     <section>
       <header className='grid my-4 grid-cols-2  md:grid-cols-3 gap-2'>
-        <TotalTenders />
-        <YearToDate />
         <MonthToDate />
+        <YearToDate />
+        <TotalTenders />
       </header>
 
       <section className='grid gap-2'>

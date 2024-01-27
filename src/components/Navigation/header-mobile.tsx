@@ -97,7 +97,7 @@ const MenuToggle = ({ toggle }: { toggle: any }) => (
     size={'icon'}
     variant={'ghost'}
     onClick={toggle}
-    className='pointer-events-auto absolute right-4 top-[7px] z-30'
+    className='pointer-events-auto absolute right-4 top-[10px] z-30'
   >
     <svg width='23' height='23' viewBox='0 0 23 23'>
       <Path

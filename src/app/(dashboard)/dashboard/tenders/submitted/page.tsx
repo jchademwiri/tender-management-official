@@ -13,8 +13,8 @@ const SubmittedTendersPage = async () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className='text-4xl'>All Submited Tenders</CardTitle>
-        <CardDescription>Total Submited Tenders</CardDescription>
+        <CardTitle>All Submited Tenders</CardTitle>
+        {/* <CardDescription>Total Submited Tenders</CardDescription> */}
       </CardHeader>
       <CardContent>
         <section className='grid md:grid-cols-2 xl:grid-cols-3 gap-2'>

@@ -3,56 +3,29 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
+    provider = "postgres"
     url      = env("DATABASE_URL")
 }
 
 model Tender {
-    id          String            @id @default(uuid())
-    number      String            @unique
-    description String            @db.Text
-    closingDate DateTime          @default(now())
-    closingTime String            @default("10:00")
-    Status      Status            @default(OPEN)
-    client      String            @db.VarChar(255)
-    hasBriefing BriefingStatus    @default(NO)
-    createdAt   DateTime          @default(now())
-    updatedAt   DateTime          @updatedAt
-    briefing    Briefing? // Link to Briefing model
-    companies   TenderToCompany[]
-    companyId   String
+    id          String       @id @default(uuid())
+    number      String       @unique
+    description String       @db.Text
+    closingDate DateTime     @default(now())
+    closingTime String       @default("10:00")
+    status      TenderStatus @default(OPEN)
+    client      String       @db.VarChar(255)
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+    company     String
 }
 
 model Company {
     id   String @id @default(uuid())
     name String
-
-    tenders  TenderToCompany[]
-    tenderId String?
 }
 
-// Junction table to represent the many-to-many relationship
-model TenderToCompany {
-    tender     Tender   @relation(fields: [tenderId], references: [id])
-    tenderId   String
-    company    Company  @relation(fields: [companyId], references: [id])
-    companyId  String
-    assignedAt DateTime @default(now())
-
-    @@id([tenderId, companyId])
-}
-
-model Briefing {
-    id        String   @id @default(uuid())
-    tenderId  String   @unique
-    tender    Tender   @relation(fields: [tenderId], references: [id])
-    date      DateTime @default(now())
-    location  String   @db.VarChar(255)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
-
-enum Status {
+enum TenderStatus {
     OPEN
     IN_PROGRESS
     SUBMITTED

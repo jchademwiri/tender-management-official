@@ -1,3 +1,5 @@
+import { cn } from '@/lib/utils';
+import { Tender } from './Forms/CreateTender';
 import {
   Card,
   CardHeader,
@@ -7,34 +9,33 @@ import {
   CardFooter,
 } from './ui/card';
 
-type Tender = {
-  number: String;
-  closingDate: Date;
-  Status: String;
-  description: String;
-  client: String;
-  briefing?: String;
-};
-
 const TenderCard = ({
   number,
   closingDate,
-  Status,
   description,
   client,
-  briefing,
+  closingTime,
+  status,
 }: Tender) => {
   return (
     <Card>
       <CardHeader>
-        <div className='flex justify-between items-center '>
+        <div className='flex justify-between'>
           <div>
             <CardTitle>{number.toUpperCase()}</CardTitle>
-            <CardDescription>{closingDate.toDateString()}</CardDescription>
-            <CardDescription>{briefing}</CardDescription>
+            <CardDescription>
+              Closing Date: {closingDate.toDateString()} @ {closingTime}
+            </CardDescription>
           </div>
-          <CardDescription>
-            {Status === 'IN_PROGRESS' ? 'IN PROGRESS' : Status}
+          <CardDescription
+            className={cn({
+              'text-destructive': status === 'OPEN',
+              'text-green-400': status === 'IN_PROGRESS',
+              'text-primary': status === 'SUBMITTED',
+              'text-green-600': status === 'APPOINTED',
+            })}
+          >
+            {status === 'IN_PROGRESS' ? 'IN PROGRESS' : status}
           </CardDescription>
         </div>
       </CardHeader>

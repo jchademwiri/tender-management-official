@@ -8,21 +8,23 @@ const getTotalTenders = async () => {
   const totalTenders = await prisma.tender.count();
   return totalTenders;
 };
+
+const getCompanies = async () => {
+  const companies = await prisma.company.findMany();
+  return companies;
+};
+
 const getAllSubmitedTenders = async () => {
   const totalSubmitedTenders = await prisma.tender.count({
     where: {
-      Status: 'SUBMITTED',
+      status: 'SUBMITTED',
     },
   });
   return totalSubmitedTenders;
 };
 
-const getTotalBriefings = async () => {
-  const totalBriefings = await prisma.briefing.count();
-  return totalBriefings;
-};
-
 const getAllTenders = async () => {
+  noStore();
   const allTenders = await prisma.tender.findMany({
     // where: {
     //   closingDate: {
@@ -30,24 +32,25 @@ const getAllTenders = async () => {
     //   },
     // },
     orderBy: {
-      Status: 'asc', // asc or 'desc' for descending order
+      status: 'asc', // asc or 'desc' for descending order
     },
   });
   return allTenders;
 };
 
 const getAllOpenTenders = async () => {
+  noStore();
   const allOpenTenders = await prisma.tender.findMany({
     where: {
       closingDate: {
         gte: currentDate, // Fetch tenders closing on or after the current date
       },
-      Status: {
+      status: {
         in: ['IN_PROGRESS', 'OPEN'],
       },
     },
     orderBy: {
-      Status: 'desc', // asc or 'desc' for descending order
+      status: 'desc', // asc or 'desc' for descending order
     },
   });
   return allOpenTenders;
@@ -56,7 +59,7 @@ const getAllOpenTenders = async () => {
 const getSubmitedTenders = async () => {
   const submittedTenders = await prisma.tender.findMany({
     where: {
-      Status: 'SUBMITTED',
+      status: 'SUBMITTED',
     },
     orderBy: {
       closingDate: 'desc', // or 'desc' for descending order
@@ -67,7 +70,7 @@ const getSubmitedTenders = async () => {
 const getAppointedTenders = async () => {
   const appointedTenders = await prisma.tender.findMany({
     where: {
-      Status: 'APPOINTED',
+      status: 'APPOINTED',
     },
     orderBy: {
       closingDate: 'desc', // or 'desc' for descending order
@@ -76,44 +79,42 @@ const getAppointedTenders = async () => {
   return appointedTenders;
 };
 
-const getAllBriefings = async () => {
-  const allBriefings = await prisma.briefing.findMany();
-  return allBriefings;
-};
-
 const YearToDateTenders = async () => {
+  noStore();
   const totalTendersYearToDate = await prisma.tender.count({
     where: {
       closingDate: {
         gte: new Date(new Date().getFullYear(), 0, 1),
         lte: new Date(new Date().getFullYear() + 1, 0, 1),
       },
-      Status: 'SUBMITTED',
+      status: 'SUBMITTED',
     },
   });
   return totalTendersYearToDate;
 };
 
 const MonthToDateTenders = async () => {
+  noStore();
   const totalTendersMonthToDate = await prisma.tender.count({
     where: {
       closingDate: {
         gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
         lte: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
       },
-      Status: 'SUBMITTED',
+      status: 'SUBMITTED',
     },
   });
   return totalTendersMonthToDate;
 };
 
 const nextClosingTenders = async () => {
+  noStore();
   const nextTenders = await prisma.tender.findMany({
     where: {
       closingDate: {
         gte: currentDate, // Fetch tenders closing on or after the current date
       },
-      Status: {
+      status: {
         in: ['IN_PROGRESS', 'OPEN'],
       },
     },
@@ -138,8 +139,7 @@ export {
   getSubmitedTenders,
   getAllOpenTenders,
   getAppointedTenders,
-  getAllBriefings,
-  getTotalBriefings,
+  getCompanies,
   YearToDateTenders,
   MonthToDateTenders,
   nextClosingTenders,
