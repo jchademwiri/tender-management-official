@@ -7,7 +7,6 @@ import { format } from 'date-fns';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -28,12 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
-
-const companieSchema = z.object({
-  name: z.string().min(2, {
-    message: 'A company name is required.',
-  }),
-});
+import { addTender } from '@/actions';
 
 const tenderFormSchema = z.object({
   number: z.string().min(2, {
@@ -48,39 +42,48 @@ const tenderFormSchema = z.object({
   closingTime: z.string().min(2, {
     message: 'Closing Time must be at least 2 characters.',
   }),
-  status: z.string({
-    required_error: 'A status is required.',
-  }),
+  status: z.string().optional(),
   client: z.string({
     required_error: 'A client is required.',
   }),
-  hasBriefing: z.string({
-    required_error: 'A client is required.',
+  company: z.string().min(2, {
+    message: 'Company  must be at least 2 characters.',
   }),
-  companies: z.array(companieSchema),
 });
 
+export type Tender = z.infer<typeof tenderFormSchema>;
+
 const CreateTender = () => {
-  const form = useForm<z.infer<typeof tenderFormSchema>>({
+  const form = useForm<Tender>({
     resolver: zodResolver(tenderFormSchema),
     defaultValues: {
       number: '',
     },
   });
 
-  function onSubmit(data: z.infer<typeof tenderFormSchema>) {
-    toast({
-      title: 'Tender Details:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-    console.log(data);
+  function onSubmit(data: Tender) {
+    try {
+      addTender(data);
+      toast({
+        title: 'Tender Details:',
+        description: (
+          <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
+            <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
+          </pre>
+        ),
+      });
+      form.reset();
+      console.log(data);
+    } catch (error: any) {
+      toast({
+        title: 'Error:',
+        description: error.message,
+      });
+      throw error;
+    }
   }
   return (
-    <div>
+    <div className='max-w-3xl'>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
           {/* tender number  */}
@@ -112,6 +115,31 @@ const CreateTender = () => {
             )}
           />
           <div className='flex gap-3 flex-col lg:flex-row justify-between'>
+            <FormField
+              control={form.control}
+              name='client'
+              render={({ field }) => (
+                <FormItem className='flex flex-col w-full max-w-xs'>
+                  <FormLabel>Tender Client</FormLabel>
+                  <Select onValueChange={field.onChange}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder='Select Tender Client' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value='City of Tshwane'>
+                        City of Tshwane
+                      </SelectItem>
+                      <SelectItem value='City Of Ekurhuleni'>
+                        City Of Ekurhuleni
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             {/* tender Closing Time and Date  */}
             <FormField
               control={form.control}
@@ -169,102 +197,20 @@ const CreateTender = () => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name='status'
-              render={({ field }) => (
-                <FormItem className='flex flex-col w-full max-w-xs'>
-                  <FormLabel>Tender Status</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder='Select tender Status' />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value='OPEN'>OPEN</SelectItem>
-                      <SelectItem value='IN_PROGRESS'>IN PROGRESS</SelectItem>
-                      <SelectItem value='SUBMITTED'>SUBMITTED</SelectItem>
-                      <SelectItem value='APPOINTED'>APPOINTED</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
           </div>
-          <div className='flex gap-3 flex-col lg:flex-row justify-between'>
-            <FormField
-              control={form.control}
-              name='client'
-              render={({ field }) => (
-                <FormItem className='flex flex-col w-full max-w-xs'>
-                  <FormLabel>Tender Status</FormLabel>
-                  <Select onValueChange={field.onChange}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder='Select tender Status' />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value='City of Tshwane'>
-                        City of Tshwane
-                      </SelectItem>
-                      <SelectItem value='IN_PROGRESS'>IN PROGRESS</SelectItem>
-                      <SelectItem value='SUBMITTED'>SUBMITTED</SelectItem>
-                      <SelectItem value='APPOINTED'>APPOINTED</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='hasBriefing'
-              render={({ field }) => (
-                <FormItem className='flex flex-col w-full max-w-xs'>
-                  <FormLabel>Briefing Status</FormLabel>
-                  <Select onValueChange={field.onChange}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder='Select Briefing Status' />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value='NO'>NO</SelectItem>
-                      <SelectItem value='YES'>YES</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          {/* <FormField
+          <FormField
             control={form.control}
-            name='companies'
+            name='company'
             render={({ field }) => (
-              <FormItem className='flex flex-col w-full max-w-xs'>
-                <FormLabel>Briefing Status</FormLabel>
-                <Select onValueChange={field.onChange}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder='Select Briefing Status' />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value='NO'>Sithembe</SelectItem>
-                    <SelectItem value='YES'>Livhu</SelectItem>
-                  </SelectContent>
-                </Select>
+              <FormItem>
+                <FormLabel>Company Name</FormLabel>
+                <FormControl>
+                  <Input placeholder='Company Name' {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
-          /> */}
+          />
           <Button type='submit'>Create Tender</Button>
         </form>
       </Form>

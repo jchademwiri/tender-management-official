@@ -14,7 +14,7 @@ const AllOpenTendersPage = async () => {
     <Card>
       <CardHeader>
         <CardTitle>All Upcoming Tenders</CardTitle>
-        <CardDescription>All Upcoming Tenders</CardDescription>
+        {/* <CardDescription>All Upcoming Tenders</CardDescription> */}
       </CardHeader>
       <CardContent className='grid md:grid-cols-2 xl:grid-cols-3 gap-2'>
         {tenders.map((tender) => (

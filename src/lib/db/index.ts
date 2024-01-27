@@ -8,6 +8,11 @@ const getTotalTenders = async () => {
   const totalTenders = await prisma.tender.count();
   return totalTenders;
 };
+
+const getCompanies = async () => {
+  const companies = await prisma.company.findMany();
+};
+
 const getAllSubmitedTenders = async () => {
   const totalSubmitedTenders = await prisma.tender.count({
     where: {
@@ -140,6 +145,7 @@ export {
   getAppointedTenders,
   getAllBriefings,
   getTotalBriefings,
+  getCompanies,
   YearToDateTenders,
   MonthToDateTenders,
   nextClosingTenders,
