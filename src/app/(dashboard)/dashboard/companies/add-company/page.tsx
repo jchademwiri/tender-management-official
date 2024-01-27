@@ -1,4 +1,4 @@
-import CreateCompany from '@/components/Forms/CreateCompany';
+import { CreateCompany } from '@/components/Forms';
 
 const AddCompany = () => {
   return (

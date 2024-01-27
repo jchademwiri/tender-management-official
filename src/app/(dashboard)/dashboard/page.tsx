@@ -1,10 +1,8 @@
-// import { authOptions } from '@/lib/auth';
-// import { getServerSession } from 'next-auth';
-
 import { MonthToDate, TotalTenders, YearToDate } from '@/components/States';
-import { UpcomingBriefings, UpcomingTenders } from '@/components/Tenders';
-import RecentSubmitedTendersTable from '@/components/Tenders/RecentSubmitedTenders';
-import { Button } from '@/components/ui/button';
+import {
+  RecentSubmitedTendersTable,
+  UpcomingTenders,
+} from '@/components/Tenders';
 
 import {
   Card,
@@ -44,7 +42,6 @@ const Dashboard = async () => {
             <RecentSubmitedTendersTable />
           </CardContent>
         </Card>
-        <UpcomingBriefings />
       </section>
     </section>
   );

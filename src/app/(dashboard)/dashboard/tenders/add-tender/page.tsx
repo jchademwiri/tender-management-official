@@ -1,4 +1,4 @@
-import CreateTender from '@/components/Forms/CreateTender';
+import { CreateTender } from '@/components/Forms';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const AddTender = () => {

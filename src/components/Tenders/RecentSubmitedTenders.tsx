@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import {
   TableHeader,
   TableRow,
@@ -5,34 +6,42 @@ import {
   TableBody,
   TableCell,
   Table,
+  TableCaption,
 } from '../ui/table';
 import { getSubmitedTenders } from '@/lib/db';
 
 const RecentSubmitedTendersTable = async () => {
   const submittedTenders = await getSubmitedTenders();
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Tender Number</TableHead>
-          <TableHead className='hidden lg:block'>Client</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Closing Date</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {submittedTenders.map((tender) => (
-          <TableRow key={tender.id}>
-            <TableCell>{tender.number}</TableCell>
-            <TableCell className='hidden lg:block'>{tender.client}</TableCell>
-            <TableCell>
-              {tender.status === 'IN_PROGRESS' ? 'IN PROGRESS' : tender.status}
-            </TableCell>
-            <TableCell>{tender.closingDate.toDateString()}</TableCell>
+    <>
+      <Table>
+        <TableCaption>A list of recently submitted tenders.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Tender Number</TableHead>
+            <TableHead>Client</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Closing Date</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {submittedTenders.map((tender) => (
+            <TableRow key={tender.id}>
+              <TableCell>{tender.number}</TableCell>
+              <TableCell>{tender.client}</TableCell>
+              <TableCell>
+                {tender.status === 'IN_PROGRESS'
+                  ? 'IN PROGRESS'
+                  : tender.status}
+              </TableCell>
+              <TableCell>
+                {tender.closingDate.toDateString()} @ {tender.closingTime}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </>
   );
 };
 export default RecentSubmitedTendersTable;
