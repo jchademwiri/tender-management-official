@@ -16,15 +16,17 @@ const TenderCard = ({
   client,
   closingTime,
   status,
+  company,
 }: Tender) => {
   return (
     <Card>
       <CardHeader>
         <div className='flex justify-between'>
           <div>
+            <CardDescription>{company}</CardDescription>
             <CardTitle>{number.toUpperCase()}</CardTitle>
             <CardDescription>
-              Closing Date: {closingDate.toDateString()} @ {closingTime}
+              {closingDate.toDateString()} @ {closingTime}
             </CardDescription>
           </div>
           <CardDescription

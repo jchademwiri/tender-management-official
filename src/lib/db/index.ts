@@ -126,7 +126,7 @@ const nextClosingTenders = async () => {
         closingTime: 'asc', // Order by closing time in ascending order
       },
     ],
-    take: 7, // Limit the result to the next 7 tenders
+    take: 6, // Limit the result to the next 7 tenders
   });
 
   return nextTenders;

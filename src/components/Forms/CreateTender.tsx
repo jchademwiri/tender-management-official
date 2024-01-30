@@ -43,11 +43,11 @@ const tenderFormSchema = z.object({
     message: 'Closing Time must be at least 2 characters.',
   }),
   status: z.string().optional(),
-  client: z.string({
-    required_error: 'A client is required.',
-  }),
-  company: z.string().min(2, {
+  client: z.string().min(2, {
     message: 'Company  must be at least 2 characters.',
+  }),
+  company: z.string({
+    required_error: 'A client is required.',
   }),
 });
 
@@ -58,12 +58,17 @@ const CreateTender = () => {
     resolver: zodResolver(tenderFormSchema),
     defaultValues: {
       number: '',
+      description: '',
+      client: '',
+      closingTime: '10:00',
+      company: 'Sithembe Transportation and Projects',
     },
   });
 
   function onSubmit(data: Tender) {
     try {
       addTender(data);
+      form.reset();
       toast({
         title: 'Tender Details:',
         description: (
@@ -72,8 +77,8 @@ const CreateTender = () => {
           </pre>
         ),
       });
-      form.reset();
-      console.log(data);
+
+      // console.log(data);
     } catch (error: any) {
       toast({
         title: 'Error:',
@@ -114,32 +119,20 @@ const CreateTender = () => {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name='client'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Client Name</FormLabel>
+                <FormControl>
+                  <Input placeholder='Client Name' {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <div className='flex gap-3 flex-col lg:flex-row justify-between'>
-            <FormField
-              control={form.control}
-              name='client'
-              render={({ field }) => (
-                <FormItem className='flex flex-col w-full max-w-xs'>
-                  <FormLabel>Tender Client</FormLabel>
-                  <Select onValueChange={field.onChange}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder='Select Tender Client' />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value='City of Tshwane'>
-                        City of Tshwane
-                      </SelectItem>
-                      <SelectItem value='City Of Ekurhuleni'>
-                        City Of Ekurhuleni
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             {/* tender Closing Time and Date  */}
             <FormField
               control={form.control}
@@ -197,20 +190,33 @@ const CreateTender = () => {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name='company'
+              render={({ field }) => (
+                <FormItem className='flex flex-col w-full max-w-xs'>
+                  <FormLabel>Company Name</FormLabel>
+                  <Select onValueChange={field.onChange}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder='Select Company Name' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value='Sithembe Transportation and Projects'>
+                        Sithembe Transportation and Projects
+                      </SelectItem>
+                      <SelectItem value='Livhu and Musa Enterprise'>
+                        Livhu and Musa Enterprise
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
-          <FormField
-            control={form.control}
-            name='company'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Company Name</FormLabel>
-                <FormControl>
-                  <Input placeholder='Company Name' {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <Button type='submit'>Create Tender</Button>
         </form>
       </Form>
