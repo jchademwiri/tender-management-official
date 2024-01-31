@@ -1,13 +1,13 @@
-import { getAllSubmitedTenders } from '@/lib/db';
+import { getTotalSubmitedTenders } from '@/lib/db';
 import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
 const TotalSubmittedTenders = async () => {
-  const allSubmitedTenders = await getAllSubmitedTenders();
+  const totalSubmitedTenders = await getTotalSubmitedTenders();
   return (
     <Card className='hidden md:block'>
       <CardHeader className='items-center'>
         <CardDescription>Total Tenders Submited</CardDescription>
-        <CardTitle>{allSubmitedTenders}</CardTitle>
+        <CardTitle>{totalSubmitedTenders}</CardTitle>
       </CardHeader>
     </Card>
   );
