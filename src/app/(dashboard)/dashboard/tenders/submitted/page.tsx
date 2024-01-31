@@ -1,4 +1,3 @@
-import { getSubmitedTenders } from '@/lib/db';
 import TenderCard from '@/components/Card';
 import {
   CardHeader,
@@ -7,11 +6,12 @@ import {
   CardContent,
   CardDescription,
 } from '@/components/ui/card';
+import { getSubmitedTenders } from '@/lib/db';
 import { Tender } from '@/lib/models';
-
 
 const SubmittedTendersPage = async () => {
   const tenders = await getSubmitedTenders();
+  console.log(tenders);
   return (
     <Card>
       <CardHeader>
