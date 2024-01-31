@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { Tender } from '@/lib/models';
 import {
   TableHeader,
   TableRow,
@@ -25,8 +25,8 @@ const RecentSubmitedTendersTable = async () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {submittedTenders.map((tender) => (
-            <TableRow key={tender.id}>
+          {submittedTenders.map((tender: Tender) => (
+            <TableRow key={tender.number}>
               <TableCell>{tender.number}</TableCell>
               <TableCell>{tender.client}</TableCell>
               <TableCell>
