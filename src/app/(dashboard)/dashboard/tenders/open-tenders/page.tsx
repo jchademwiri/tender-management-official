@@ -7,7 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Tender } from '@/components/Forms/CreateTender';
+import { Tender } from '@/lib/models';
+
 
 const AllOpenTendersPage = async () => {
   const tenders = await getAllOpenTenders();

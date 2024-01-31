@@ -1,5 +1,5 @@
 import TenderCard from '@/components/Card';
-import { Tender } from '@/components/Forms/CreateTender';
+
 import {
   Card,
   CardContent,
@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { getAppointedTenders } from '@/lib/db';
+import { Tender } from '@/lib/models';
 
 const AppointedTendersPage = async () => {
   const tenders = await getAppointedTenders();
