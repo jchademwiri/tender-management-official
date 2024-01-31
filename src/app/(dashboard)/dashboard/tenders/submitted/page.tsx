@@ -11,7 +11,6 @@ import { Tender } from '@/lib/models';
 
 const SubmittedTendersPage = async () => {
   const tenders = await getSubmitedTenders();
-  console.log(tenders);
   return (
     <Card>
       <CardHeader>

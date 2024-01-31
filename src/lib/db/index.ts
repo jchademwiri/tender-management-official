@@ -14,7 +14,7 @@ const getCompanies = async () => {
   return companies;
 };
 
-const getAllSubmitedTenders = async () => {
+const getTotalSubmitedTenders = async () => {
   const totalSubmitedTenders = await prisma.tender.count({
     where: {
       status: 'SUBMITTED',
@@ -135,7 +135,7 @@ const nextClosingTenders = async () => {
 export {
   getAllTenders,
   getTotalTenders,
-  getAllSubmitedTenders,
+  getTotalSubmitedTenders,
   getSubmitedTenders,
   getAllOpenTenders,
   getAppointedTenders,

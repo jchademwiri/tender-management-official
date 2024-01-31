@@ -17,14 +17,14 @@ const links: MyLink[] = [
 
 const CreateLinks = () => {
   return (
-    <div className='space-x-3 text-primary'>
+    <section className='space-x-3 text-primary'>
       {links.map(({ path, title }: MyLink) => (
         <Button key={path} variant={'outline'} className='gap-2'>
           <Plus />
           <Link href={path}>{title}</Link>
         </Button>
       ))}
-    </div>
+    </section>
   );
 };
 export default CreateLinks;
