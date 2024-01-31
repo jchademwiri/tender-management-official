@@ -9,7 +9,7 @@ datasource db {
 
 model Tender {
     id          String       @id @default(uuid())
-    number      String       //@unique
+    number      String       @unique
     description String       @db.Text
     closingDate DateTime     @default(now())
     closingTime String       @default("10:00")

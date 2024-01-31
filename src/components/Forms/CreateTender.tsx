@@ -210,6 +210,9 @@ const CreateTender = () => {
                       <SelectItem value='Livhu and Musa Enterprise'>
                         Livhu and Musa Enterprise
                       </SelectItem>
+                      <SelectItem value='Sithembe and Livhu'>
+                        Sithembe and Livhu
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

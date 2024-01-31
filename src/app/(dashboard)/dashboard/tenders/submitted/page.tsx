@@ -3,25 +3,27 @@ import TenderCard from '@/components/Card';
 import {
   CardHeader,
   CardTitle,
-  CardDescription,
   Card,
   CardContent,
+  CardDescription,
 } from '@/components/ui/card';
+import { Tender } from '@/components/Forms/CreateTender';
 
 const SubmittedTendersPage = async () => {
-  const submittedTenders = await getSubmitedTenders();
+  const tenders = await getSubmitedTenders();
   return (
     <Card>
       <CardHeader>
-        <CardTitle>All Submited Tenders</CardTitle>
-        {/* <CardDescription>Total Submited Tenders</CardDescription> */}
+        <CardTitle>Submited Tenders</CardTitle>
       </CardHeader>
-      <CardContent>
-        <section className='grid md:grid-cols-2 xl:grid-cols-3 gap-2'>
-          {submittedTenders.map((tender) => (
-            <TenderCard key={tender.id} {...tender} />
-          ))}
-        </section>
+      <CardContent className='grid md:grid-cols-2 xl:grid-cols-3 gap-2'>
+        {tenders.length > 0 ? (
+          tenders.map((tender: Tender) => (
+            <TenderCard key={tender.number} {...tender} />
+          ))
+        ) : (
+          <CardDescription>No Submited Tenders Yet</CardDescription>
+        )}
       </CardContent>
     </Card>
   );

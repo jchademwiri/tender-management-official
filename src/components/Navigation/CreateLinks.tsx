@@ -6,13 +6,13 @@ import { MyLink } from '@/types';
 
 const links: MyLink[] = [
   {
-    title: 'Add Tender',
+    title: 'Add New Tender',
     path: '/dashboard/tenders/add-tender',
   },
-  {
-    title: 'Add Company',
-    path: '/dashboard/companies/add-company',
-  },
+  // {
+  //   title: 'Add Company',
+  //   path: '/dashboard/companies/add-company',
+  // },
 ];
 
 const CreateLinks = () => {

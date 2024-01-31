@@ -25,7 +25,7 @@ const NavMenu = () => {
             <Menu />
           </div>
 
-          <Button className='py-5'>
+          {/* <Button className='py-5'>
             <Link
               className='text-xl font-semibold'
               href={`https://wa.me/message/AQCSRA3QZVK7G1`}
@@ -34,7 +34,7 @@ const NavMenu = () => {
             >
               Start a Project
             </Link>
-          </Button>
+          </Button> */}
 
           <div className='md:hidden'>
             <MobileMenu />

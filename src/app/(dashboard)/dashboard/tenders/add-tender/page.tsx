@@ -1,10 +1,12 @@
 import { CreateTender } from '@/components/Forms';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const AddTender = () => {
   return (
     <Card>
-      <CardHeader>Create a new tender</CardHeader>
+      <CardHeader>
+        <CardTitle>Create a new tender</CardTitle>
+      </CardHeader>
       <CardContent>
         <CreateTender />
       </CardContent>
