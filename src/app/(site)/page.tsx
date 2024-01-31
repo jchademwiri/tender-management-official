@@ -1,9 +1,7 @@
-
-
 const Home = async () => {
   return (
     <div>
-      <div className='w-1/2 mx-auto'>
+      <div className='w-full max-w-[1240px] mx-auto '>
         <h1 className='text-3xl font-bold'>Home Page</h1>
       </div>
     </div>

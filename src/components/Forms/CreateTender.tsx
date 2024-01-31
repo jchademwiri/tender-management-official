@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { format } from 'date-fns';
 import {
   Form,
@@ -28,30 +27,7 @@ import {
   SelectValue,
 } from '../ui/select';
 import { addTender } from '@/actions';
-
-const tenderFormSchema = z.object({
-  number: z.string().min(2, {
-    message: 'Tender Number must be at least 2 characters.',
-  }),
-  description: z.string().min(2, {
-    message: 'Tender description must be at least 2 characters.',
-  }),
-  closingDate: z.date({
-    required_error: 'A closing date is required.',
-  }),
-  closingTime: z.string().min(2, {
-    message: 'Closing Time must be at least 2 characters.',
-  }),
-  status: z.string().optional(),
-  client: z.string().min(2, {
-    message: 'Company  must be at least 2 characters.',
-  }),
-  company: z.string({
-    required_error: 'A client is required.',
-  }),
-});
-
-export type Tender = z.infer<typeof tenderFormSchema>;
+import { Tender, tenderFormSchema } from '@/lib/models';
 
 const CreateTender = () => {
   const form = useForm<Tender>({
@@ -209,6 +185,9 @@ const CreateTender = () => {
                       </SelectItem>
                       <SelectItem value='Livhu and Musa Enterprise'>
                         Livhu and Musa Enterprise
+                      </SelectItem>
+                      <SelectItem value='Sithembe and Livhu'>
+                        Sithembe and Livhu
                       </SelectItem>
                     </SelectContent>
                   </Select>

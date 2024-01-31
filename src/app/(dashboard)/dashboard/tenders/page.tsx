@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Tender } from '@/lib/models';
 
 const AllTendersPage = async () => {
   const tenders = await getAllTenders();
@@ -14,12 +15,15 @@ const AllTendersPage = async () => {
     <Card>
       <CardHeader>
         <CardTitle>All Tenders</CardTitle>
-        <CardDescription>All Tenders</CardDescription>
       </CardHeader>
       <CardContent className='grid md:grid-cols-2 xl:grid-cols-3 gap-2'>
-        {tenders.map((tender) => (
-          <TenderCard key={tender.id} {...tender} />
-        ))}
+        {tenders.length > 0 ? (
+          tenders.map((tender: Tender) => (
+            <TenderCard key={tender.number} {...tender} />
+          ))
+        ) : (
+          <CardDescription>No Tenders</CardDescription>
+        )}
       </CardContent>
     </Card>
   );

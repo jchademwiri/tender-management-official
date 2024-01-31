@@ -1,6 +1,6 @@
 export const links: { title: string; href: string }[] = [
   {
-    title: 'Admin',
+    title: 'Dashboard',
     href: '/dashboard',
   },
 ];

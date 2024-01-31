@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { Tender } from './Forms/CreateTender';
+
 import {
   Card,
   CardHeader,
@@ -8,6 +8,7 @@ import {
   CardContent,
   CardFooter,
 } from './ui/card';
+import { Tender } from '@/lib/models';
 
 const TenderCard = ({
   number,

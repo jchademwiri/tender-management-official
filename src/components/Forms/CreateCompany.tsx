@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { toast } from '../ui/use-toast';
 import {
   Form,
@@ -15,14 +14,7 @@ import {
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { addCompany } from '@/actions';
-
-export const companyFormSchema = z.object({
-  name: z.string().min(2, {
-    message: 'A company name is required.',
-  }),
-});
-
-export type Company = z.infer<typeof companyFormSchema>;
+import { Company, companyFormSchema } from '@/lib/models';
 
 const CreateCompany = () => {
   const form = useForm<Company>({

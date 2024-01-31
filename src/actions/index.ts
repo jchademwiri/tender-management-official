@@ -1,6 +1,5 @@
 'use server';
-import { Company } from '@/components/Forms/CreateCompany';
-import { Tender } from '@/components/Forms/CreateTender';
+import { Company, Tender } from '@/lib/models';
 import prisma from '@/prisma/client';
 import { revalidatePath } from 'next/cache';
 
